@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const glob = require('glob')
 const bundleFileName = 'bundle';
 const dirName = 'wwwroot/dist';
@@ -42,8 +43,9 @@ module.exports = (env, argv) => {
         },
        optimization: {
                             minimizer: [
-                              new CssnanoPlugin()
-                            ]
+               new CssnanoPlugin(), new UglifyJsPlugin()
+           ],
+
                           },
         plugins: [
             new webpack.ProvidePlugin({

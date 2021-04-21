@@ -18,7 +18,7 @@
 
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<Exec Command="npm install" />
-		<Exec Command="npm run build" />
+		<Exec Command="npm run production" />
 		<ItemGroup>
 			<DistFiles Include="wwwroot\dist\**" />
 			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
