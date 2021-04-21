@@ -11,5 +11,15 @@
         @RenderBody()
     </div>
     <script src="~/dist/bundle.js" asp-append-version="true"></script>
+
+    @section scripts{
+    <script>
+        $(function () {
+            $('button.details').on('click', function () {
+                $('.modal-body').load(`/masterdetails/product?id=${$(this).data('id')}`);
+            });
+        })
+    </script>
+}
 </body>
 </html>

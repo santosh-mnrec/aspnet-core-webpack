@@ -6,6 +6,7 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob')
 const bundleFileName = 'bundle';
 const dirName = 'wwwroot/dist';
+const webpack = require("webpack");
 const CssnanoPlugin = require('cssnano-webpack-plugin');
 module.exports = (env, argv) => {
     return {
@@ -45,6 +46,10 @@ module.exports = (env, argv) => {
                             ]
                           },
         plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            }),
             new CleanWebpackPlugin(),
             new MiniCssExtractPlugin({
                 filename: bundleFileName + '.css'
