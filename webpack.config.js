@@ -6,7 +6,7 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob')
 const bundleFileName = 'bundle';
 const dirName = 'wwwroot/dist';
-
+const CssnanoPlugin = require('cssnano-webpack-plugin');
 module.exports = (env, argv) => {
     return {
         mode: argv.mode === "production" ? "production" : "development",
@@ -35,10 +35,15 @@ module.exports = (env, argv) => {
                                 }
                             },
                             'sass-loader'
-                        ]
-                }
+                        ]  
+                },
             ]
         },
+       optimization: {
+                            minimizer: [
+                              new CssnanoPlugin()
+                            ]
+                          },
         plugins: [
             new CleanWebpackPlugin(),
             new MiniCssExtractPlugin({
@@ -47,7 +52,8 @@ module.exports = (env, argv) => {
             new PurgecssPlugin({
                 paths: glob.sync('./Views/**/*.cshtml', { nodir: true }),
                 whitelistPatterns: [ /selectize-.*/ ]
-            })
+            }),
+            new CssnanoPlugin()
         ]
     };
 };
